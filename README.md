@@ -10,6 +10,8 @@ cd ../../rb
 rake clean compile native gem
 gem install pkg/CowTalk-0.0.1-universal-darwin-13.gem
 irb -r CowTalk
-CowTalk.new.talk
-=> "I'm a cow. moo"
+  2.1.4 :001 > cow_talk = CowTalk.new
+    => #<CowTalk:0x007f87711816e0>
+  2.1.4 :002 > cow_talk.talk
+    => "I'm a cow. moo"
 ```
