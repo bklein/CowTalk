@@ -1,4 +1,5 @@
 #include <ruby.h>
+#include <stdio.h>
 
 #include "cowtalk.h"
 
@@ -15,7 +16,7 @@ static void ct_free(void *p) {
 static VALUE ct_talk(VALUE self) {
   struct CowTalkHandle* ptr;
   Data_Get_Struct(self, struct CowTalkHandle, ptr);
-  char* message = CowTalk_Talk(ptr);
+  const char* message = CowTalk_Talk(ptr);
   VALUE rb_str = rb_str_new2(message);
   return rb_str;
 }

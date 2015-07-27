@@ -7,7 +7,7 @@ typedef struct CowTalkHandle* CowTalkHandlePtr;
 
 CowTalkHandlePtr CowTalk_Create();
 
-char* CowTalk_Talk(CowTalkHandlePtr p);
+const char* CowTalk_Talk(CowTalkHandlePtr p);
 
 void CowTalk_Destroy(void* p);
 

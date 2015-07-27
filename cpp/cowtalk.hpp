@@ -9,7 +9,7 @@ class CowTalk {
  public:
   typedef std::unique_ptr<CowTalk> Ptr;
   static Ptr Create();
-  std::string talk() const;
+  const std::string& talk() const;
   ~CowTalk();
  private:
   class Impl;

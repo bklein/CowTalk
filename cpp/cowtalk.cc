@@ -8,7 +8,7 @@ class CowTalk::Impl {
   Impl()
     : message_("I'm a cow. moo") {}
 
-  std::string talk() const {
+  const std::string& talk() const {
     return message_;
   }
   ~Impl() {}
@@ -25,7 +25,7 @@ CowTalk::Ptr CowTalk::Create() {
   return std::move(ptr);
 }
 
-std::string CowTalk::talk() const {
+const std::string& CowTalk::talk() const {
   return impl->talk();
 }
 
@@ -48,11 +48,8 @@ CowTalkHandlePtr CowTalk_Create() {
   return handle;
 }
 
-char* CowTalk_Talk(CowTalkHandlePtr handle) {
-  const std::string message = handle->ptr->talk();
-  char* cstr = new char[message.length()+1];
-  std::strcpy(cstr, message.c_str());
-  return cstr;
+const char* CowTalk_Talk(CowTalkHandlePtr handle) {
+  return handle->ptr->talk().c_str();
 }
 
 void CowTalk_Destroy(void* p) {
