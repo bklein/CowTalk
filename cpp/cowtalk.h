@@ -3,11 +3,13 @@ extern "C" {
 #endif
 
 struct CowTalkHandle;
-typedef struct CowTalkHandle* CowTalkHandlePtr;
+typedef struct CowTalkHandle CowTalkHandle;
 
-CowTalkHandlePtr CowTalk_Create();
+CowTalkHandle* CowTalk_Create();
 
-const char* CowTalk_Talk(CowTalkHandlePtr p);
+const char* CowTalk_Talk(const CowTalkHandle* const handle);
+const char* CowTalk_Touch(CowTalkHandle* handle);
+int CowTalk_TimesTouched(const CowTalkHandle* const handle);
 
 void CowTalk_Destroy(void* p);
 

@@ -11,5 +11,6 @@ target_link_libraries(cow_talk
   CowTalk)
 
 install(TARGETS CowTalk
+  LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib)
 install(FILES cowtalk.h DESTINATION include)
