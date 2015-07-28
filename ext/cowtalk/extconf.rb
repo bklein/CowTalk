@@ -5,13 +5,10 @@ require 'mkmf'
 LIBDIR = RbConfig::CONFIG['libdir']
 INCLUDEDIR = RbConfig::CONFIG['includedir']
 
-LIB_DIRS = [LIBDIR, File.expand_path(File.join(File.dirname(__FILE__), "lib"))]
+LIB_DIRS = [LIBDIR]
 HEADER_DIRS = [INCLUDEDIR, File.expand_path(File.join(File.dirname(__FILE__), "include"))]
 
-libs = ['-lCowTalk']
 extension_name = 'cowtalk'
 dir_config(extension_name, HEADER_DIRS, LIB_DIRS)
-libs.each do |lib|
-  $LOCAL_LIBS  << "#{lib} "
-end
+$LOCAL_LIBS << "-lstdc++"
 create_makefile(extension_name)
