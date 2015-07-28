@@ -2,10 +2,9 @@
 extern "C" {
 #endif
 
-struct CowTalkHandle;
 typedef struct CowTalkHandle CowTalkHandle;
 
-CowTalkHandle* CowTalk_Create();
+CowTalkHandle* CowTalk_Create(const char* message);
 
 const char* CowTalk_Talk(const CowTalkHandle* const handle);
 const char* CowTalk_Touch(CowTalkHandle* handle);

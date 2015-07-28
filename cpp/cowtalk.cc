@@ -7,14 +7,13 @@ namespace cow_talk {
 
 class CowTalk::Impl {
  public:
-  Impl()
-    : message_("I'm a cow. moo"),
+  Impl(const std::string& message)
+    : message_(message),
       touched_cache_(),
       times_touched_(0) {}
 
-  const std::string& Talk() const {
-    return message_;
-  }
+  const std::string& Talk() const { return message_; }
+  int TimesTouched() const { return times_touched_; }
 
   const std::string& Touch() {
     ++times_touched_;
@@ -24,7 +23,6 @@ class CowTalk::Impl {
     return touched_cache_;
   }
 
-  int TimesTouched() const { return times_touched_; }
   ~Impl() {}
 
  private:
@@ -33,9 +31,9 @@ class CowTalk::Impl {
   int times_touched_;
 };
 
-CowTalk::Ptr CowTalk::Create() {
+CowTalk::Ptr CowTalk::Create(const std::string& message) {
   std::unique_ptr<Impl> impl =
-    std::unique_ptr<Impl>(new Impl());
+    std::unique_ptr<Impl>(new Impl(message));
   std::unique_ptr<CowTalk> ptr =
     std::unique_ptr<CowTalk>(
         new CowTalk(impl));
@@ -69,9 +67,14 @@ struct CowTalkHandle {
   cow_talk::CowTalk::Ptr ptr;
 };
 
-CowTalkHandle* CowTalk_Create() {
+CowTalkHandle* CowTalk_Create(const char* message) {
   CowTalkHandle* handle = new CowTalkHandle();
-  handle->ptr = cow_talk::CowTalk::Create();
+  if (!message) {
+    handle->ptr = cow_talk::CowTalk::Create();
+  } else {
+    const std::string str_message(message);
+    handle->ptr = cow_talk::CowTalk::Create(str_message);
+  }
   return handle;
 }
 

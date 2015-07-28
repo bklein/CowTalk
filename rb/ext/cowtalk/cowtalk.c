@@ -37,8 +37,14 @@ static VALUE ct_times_touched(VALUE self) {
   return rb_times_touched;
 }
 
-VALUE ct_new(VALUE class) {
-  CowTalkHandle* ptr = CowTalk_Create();
+VALUE ct_new(int argc, VALUE* argv, VALUE class) {
+  CowTalkHandle* ptr = NULL;
+  if (argc == 0) {
+    ptr = CowTalk_Create(NULL);
+  } else {
+    const char* const message = StringValuePtr(argv[0]);
+    ptr = CowTalk_Create(message);
+  }
   VALUE tdata = Data_Wrap_Struct(class, 0, ct_free, ptr);
   rb_obj_call_init(tdata, 0, NULL);
   return tdata;
@@ -46,7 +52,7 @@ VALUE ct_new(VALUE class) {
 
 void Init_CowTalk() {
   rb_CowTalk = rb_define_class("CowTalk", rb_cObject);
-  rb_define_singleton_method(rb_CowTalk, "new", ct_new, 0);
+  rb_define_singleton_method(rb_CowTalk, "new", ct_new, -1);
   rb_define_method(rb_CowTalk, "initialize", ct_init, 0);
   rb_define_method(rb_CowTalk, "talk", ct_talk, 0);
   rb_define_method(rb_CowTalk, "touch", ct_touch, 0);

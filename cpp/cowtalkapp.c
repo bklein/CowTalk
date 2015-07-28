@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
    *
    */
 
-  CowTalkHandle* cow_talk = CowTalk_Create();
+  CowTalkHandle* cow_talk = CowTalk_Create(NULL);
   const char* talk = CowTalk_Talk(cow_talk);
   printf("cow said: %s\n", talk);
   CowTalk_Destroy(cow_talk);
