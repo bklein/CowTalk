@@ -14,24 +14,24 @@ static void ct_free(void *p) {
 }
 
 static VALUE ct_talk(VALUE self) {
-  struct CowTalkHandle* ptr;
-  Data_Get_Struct(self, struct CowTalkHandle, ptr);
+  CowTalkHandle* ptr;
+  Data_Get_Struct(self, CowTalkHandle, ptr);
   const char* message = CowTalk_Talk(ptr);
   VALUE rb_str = rb_str_new2(message);
   return rb_str;
 }
 
 static VALUE ct_touch(VALUE self) {
-  struct CowTalkHandle* ptr;
-  Data_Get_Struct(self, struct CowTalkHandle, ptr);
+  CowTalkHandle* ptr;
+  Data_Get_Struct(self, CowTalkHandle, ptr);
   const char* touch = CowTalk_Touch(ptr);
   VALUE rb_touch = rb_str_new2(touch);
   return rb_touch;
 }
 
 static VALUE ct_times_touched(VALUE self) {
-  struct CowTalkHandle* ptr;
-  Data_Get_Struct(self, struct CowTalkHandle, ptr);
+  CowTalkHandle* ptr;
+  Data_Get_Struct(self, CowTalkHandle, ptr);
   const int times_touched = CowTalk_TimesTouched(ptr);
   VALUE rb_times_touched = INT2NUM(times_touched);
   return rb_times_touched;
